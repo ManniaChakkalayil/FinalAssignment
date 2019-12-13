@@ -1,18 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
 
-    <TextView
+        <TextView
+            android:id="@+id/gx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GX"
+            android:layout_margin="20dp"
+            />
+
+        <TextView
+            android:id="@+id/gy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GY"
+            android:layout_margin="20dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="64dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="38dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border_round"
+        >
+        <Button
+            android:id="@+id/ball_top"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/round"
+            />
+
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/border_round"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            >
+            <Button
+                android:id="@+id/ball"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/round"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/border_round"
+            >
+            <Button
+                android:id="@+id/ball_right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/round"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/indicator"
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:textColor="#fafafa"
+        android:background="@drawable/border_round"
+        android:layout_gravity="center"/>
+    <Button
+        android:id="@+id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View List"
+        android:layout_margin="16dp"
+        android:textColor="#fafafa"
+        android:background="@drawable/border_round"
+        android:layout_gravity="center"/>
+
+
+</LinearLayout>
