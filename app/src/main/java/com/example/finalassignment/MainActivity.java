@@ -1,8 +1,12 @@
 package com.example.finalassignment;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -17,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -45,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     String timestamp;
     List<Reading> list;
 
+    private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
+    private NotificationManager mNotifyManager;
+    private static final int NOTIFICATION_ID = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         save.setOnClickListener(this);
         crx = ball.getX()+320;
         cry = ball.getY()+325;
+
+        createNotificationChannel();
     }
 
     @Override
@@ -113,8 +124,53 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     void show_indicator(float x, float y){
         if( x<=.5 && x>=-.5 && y<=.5 && y>=-.5  ){
             indicator.setText("Almost Reached");
+            sendNotification();
+
         }else{
             indicator.setText("");
+        }
+    }
+
+    public void sendNotification() {
+        NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
+        mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
+
+    }
+
+    private NotificationCompat.Builder getNotificationBuilder(){
+
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent notificationPendingIntent = PendingIntent.getActivity(this,
+                NOTIFICATION_ID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
+                .setContentTitle("You've been notified!")
+                .setContentText("You have almost reached")
+                .setContentIntent(notificationPendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_notifications_black_24dp);
+
+        return notifyBuilder;
+    }
+
+    public void createNotificationChannel()
+    {
+        mNotifyManager = (NotificationManager)
+                getSystemService(NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >=
+                android.os.Build.VERSION_CODES.O) {
+            // Create a NotificationChannel
+            NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID,
+                    "Mascot Notification", NotificationManager
+                    .IMPORTANCE_HIGH);
+
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setDescription("Notification from Mascot");
+            mNotifyManager.createNotificationChannel(notificationChannel);
         }
     }
 
