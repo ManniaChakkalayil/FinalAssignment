@@ -125,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if( x<=.5 && x>=-.5 && y<=.5 && y>=-.5  ){
             indicator.setText("Almost Reached");
             sendNotification();
+            Reading r = new Reading(x,y,timestamp);
+            list.add(r);
+            saveList(list,"read");
 
         }else{
             indicator.setText("");
