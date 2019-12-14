@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 NOTIFICATION_ID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
-                .setContentTitle("You've been notified!")
+                .setContentTitle("Hey!!!")
                 .setContentText("You have almost reached")
                 .setContentIntent(notificationPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
